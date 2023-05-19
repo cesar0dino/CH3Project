@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clicker</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <style>
+        .hidden{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <h2 id="lose">User goes here</h2>
+        <div class="scoreplace">
+            <h3 id="score">CLICK: 0</h3>
+        </div>
+        <div class="text">
+
+        </div>
+        <input type="text" id="username" name="username" placeholder="Enter name">
+        <button id="submit">Submit</button>
+        <div class="row">
+            <div class="avatar">
+                <img id="picture" height="100" width="100" alt="your avatar!" src="https://i5.walmartimages.com/asr/e63a8adf-d7ce-48ec-8ad7-e020680c9a48_1.7d1abdeafc090403fbcc4ba2ace210a4.jpeg">
+            </div>
+        </div>
+        <button id="click">CLICK!</button>
+        <div class="row">
+            <fieldset>
+                <legend><h3>Shop</h3></legend>
+                <div class="row">
+                    <label for="1">Instead of feeding 1, you feed 1 more. (Need 50 CLICKS)</label>
+                    <button id="1">Buy</button>
+                </div>
+                <div class="row">
+                    <label for="5">Instead of feeding 1, you feed 5 more at a time (Need 250 CLICKS)</label>
+                    <button id="5">Buy</button>
+                </div>
+                <div class="row">
+                    <label for="10">Instead of feeding 1, you feed 10 more at a time (Need 500 CLICKS)</label>
+                    <button id="10">Buy</button>
+                </div>
+                <div class="row">
+                    <label for="25">Instead of feeding 1, you feed 25 more at a time (Need 1000 CLICKS)</label>
+                    <button id="25">Buy</button>
+                </div>
+                <div class="row">
+                    <label for="50">Instead of feeding 1, you feed 50 more at a time (Need 1,500 CLICKS)</label>
+                    <button id="50">Buy</button>
+                </div>
+                <div class="row">
+                    <label for="100">Instead of feeding 1, you feed 100 more at a time (Need 2,000 CLICKS)</label>
+                    <button id="100">Buy</button>
+                </div>
+                <br>
+                <div class="row">
+                    <label for="win">Win the game</label>
+                    <button id="win">Buy</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<script>
+    const content = document.querySelector('.text');
+
+    const user = document.querySelector('user');
+    const username = document.getElementById('username');
+    const submit = document.getElementById('submit');
+
+    submit.addEventListener('click', function(e){
+        let displayuser = username.value;
+
+        const actualuser = document.createElement('h2');
+        actualuser.innerHTML = `${displayuser}`;
+        content.insertAdjacentElement('afterbegin', actualuser);
+
+        const unwantedElement = document.querySelector('#lose');
+        unwantedElement.remove();
+
+        username.classList.add("hidden");
+        submit.classList.add("hidden");
+    });
+
+    let score = document.getElementById('score');
+    const scorePlace = document.querySelector('.scoreplace');
+    const click = document.getElementById('click');
+    const picture = document.getElementById('picture');
+
+    score = 0;
+    click.addEventListener('click', function(e){
+        score++;
+        scorePlace.innerHTML = `<h3 id="score">CLICK: ${score}</h3>`;
+
+        if(score >= 10000){
+            picture.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA7IUzu0yTyuThsxVRTHKAGNdSV3XEsY_HsNmPOK6Z9Kfj1gdqXKIzEb7oOSv0WuRAc7Q&usqp=CAU";
+        }
+        else if(score >= 1000){
+            picture.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN5APeh2TCdbsVkb6vnpcn_fomdNNmKf4WuFhrp9_D22sA-43xwKAsIvhIkyXQud7nNzo&usqp=CAU";
+        }
+        else if(score >= 500){
+            picture.src = "https://cdn11.bigcommerce.com/s-nf2x4/images/stencil/1280x1280/products/869/7157/Pirate-Rubber-Duck-Wild-Republic-2__69053.1573999902.jpg?c=2";
+        }
+        else if(score >= 100){
+            picture.src = "https://amsterdamduckstore.com/wp-content/uploads/2017/07/Pirate-red-rubber-duck-leaning-Amsterdam-Duck-Store.jpg";
+        }
+        else if (score >= 70){
+            picture.src = "https://m.media-amazon.com/images/I/71ZZdUqvgSL._AC_SX679_.jpg";
+        }
+        else if(score >= 69){
+            picture.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXKBdVkZAk7BdlbsJbkHUsCm5wGQT3hOuOTflc52g2FmCpP0tHfhp8HnRmrIYRkdiodJg&usqp=CAU";
+        }
+        else if (score >= 60){
+            picture.src = "https://i5.walmartimages.com/asr/e63a8adf-d7ce-48ec-8ad7-e020680c9a48_1.7d1abdeafc090403fbcc4ba2ace210a4.jpeg";
+        }
+    });
+
+    const times2 = document.getElementById('1');
+
+    let i = 1;
+
+    times2.addEventListener('click', function(e){
+        if(score >= 50){
+            score -= 50;
+            click.addEventListener('click', function(e){
+                score += i;
+                scorePlace.innerHTML = `<h3 id="score">CLICK: ${score}</h3>`;
+            });
+        }
+    });
+
+    const times5 = document.getElementById('5');
+
+    let q = 5;
+
+    times5.addEventListener('click', function(e){
+        if(score >= 250){
+            score -= 250;
+            click.addEventListener('click', function(e){
+                score += q;
+                scorePlace.innerHTML = `<h3 id="score">CLICK: ${score}</h3>`;
+            });
+        }
+    });
+
+    const times10 = document.getElementById('5');
+
+    let w = 5;
+
+    times10.addEventListener('click', function(e){
+        if(score >= 2000){
+            score -= 2000;
+            click.addEventListener('click', function(e){
+                score += w;
+                scorePlace.innerHTML = `<h3 id="score">CLICK: ${score}</h3>`;
+            });
+        }
+    });
+
+
+</script>
+</body>
+</html>
